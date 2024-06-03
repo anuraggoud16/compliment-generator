@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+    background-color: black;
+    color: white;
+}
+.outer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.inner{
+    background-color: beige;
+    border-radius: 30px;
+    color: black;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 200px;
+   width: 300px;
+}
+#bt{
+    border: none;
+    background-color: black;
+    color: antiquewhite;
+    height: 30px;
+    width: 70px;
+    border-radius: 20px;
+}
+#tb{
+    border-radius: 10px;
+}
+    </style>
+</head>
+<body>
+    <center>
+        <div class="outer">
+            <h1>COMPLIMENT GENERATOR</h1>
+            <div class="inner">
+                <h2>Enter your name:</h2>
+                <form action="/sub" method="post">
+                 <input type="text" name="name" id="tb"><br><br>
+                 <input type="submit" name="" id="bt">
+                </form>
+            </div>
+            <br>
+            <%if(locals.com){%>
+                <h1>
+                    <%= com %>
+                </h1>
+                <% } %>
+        </div>
+    </center>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <script>
+        document.getElementById("bt").addEventListener("click",()=>{
+            confetti({
+     particleCount: 300,
+     spread: 90,
+      origin: { x:1, y: 0.9 },
+    });
+
+    confetti({
+     particleCount: 300,
+     spread: 90,
+      origin: { x:0, y: 0.9 },
+    });
+        });
+    </script>
+</body>
+</html>

@@ -1,26 +1,34 @@
 import express from "express";
-import {dirname} from "path";
-import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
-const dirname_=dirname(fileURLToPath(import.meta.url));
+import axios from "axios";
 const app=express();
 const port=3000;
 app.use(bodyParser.urlencoded({extended:true}));
+
+app.use(express.static("public"));
 app.get("/",(req,res)=>{
-    res.sendFile(dirname_+"/public/index.html");
+    res.render("index.ejs");
 });
 
-// custom middleware
-// function logger(req,res,next){
-//   console.log(req.method +" "+ req.url);
-//   next();
-// }
-// app.use(logger);
+app.post("/sub", async(req,res)=>{
+  try{
+    if(req.body.name!='')
+      {
+        const response= await axios.get("https://8768zwfurd.execute-api.us-east-1.amazonaws.com/v1/compliments");
+        res.render("index.ejs",{com: response.data});
+      }
+    else{
+      res.render("index.ejs",{com: "enter the name!!"});
+    }
+    
+  }
+  catch(error)
+  {
+    console.error("Failed");
+    send.status(500);
+  }
+})
 
-app.post("/sattu",(req,res)=>{
-  console.log(req.body);
-  res.send(req.body.jaffa);
-});
 app.listen(process.env.PORT || port,()=>{
     console.log("Listening on port number 3000. Sathwika is a Queen");
 });
